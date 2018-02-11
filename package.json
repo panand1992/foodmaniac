@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "postinstall": "grunt prod",
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "build": "webpack"
   },
   "dependencies": {
     "babel": "^6.23.0",
