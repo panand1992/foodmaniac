@@ -10,7 +10,7 @@ module.exports = function(){
         },
 
         getRestaurantDetails : function getRestaurantDetails(val) {
-            return customHttp.sendGetRequest("https://developers.zomato.com/api/v2.1/geocode?lat="+val.lat+"&lon="+val.lon);
+            return customHttp.sendGetRequest("https://developers.zomato.com/api/v2.1/restaurant?res_id="+val);
         }
     }
 }
