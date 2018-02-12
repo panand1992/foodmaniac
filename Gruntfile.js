@@ -14,6 +14,17 @@ module.exports = function(grunt) {
                 }]
             }
         },
+        cssmin: {
+            target: {
+                files: [{
+                    expand: true,
+                    cwd: 'public/dist/stylesheets/css',
+                    src: ['*.css', '!*.min.css'],
+                    dest: 'public/dist/stylesheets/css',
+                    ext: '.min.css'
+                }]
+            }
+        },
         webpack: {
             options: {
                 stats: !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
@@ -24,6 +35,7 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-webpack');
-    grunt.registerTask('prod', ['clean', 'sass:dist', 'webpack:prod']);
+    grunt.registerTask('prod', ['clean', 'sass:dist', 'cssmin', 'webpack:prod']);
 };

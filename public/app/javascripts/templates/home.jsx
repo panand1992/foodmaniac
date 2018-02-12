@@ -43,7 +43,6 @@ class Home extends React.Component {
    			lat : this.state.selectedPlace.geometry.location.lat(),
    			lng : this.state.selectedPlace.geometry.location.lng()
    		}
-   		//window.location.assign('/listpage/' + btoa(JSON.stringify(data)));
    		this.props.history.push('/listpage/' + btoa(JSON.stringify(data)));
    	};
 
