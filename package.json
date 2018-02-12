@@ -18,6 +18,7 @@
     "debug": "~2.2.0",
     "express": "~4.13.1",
     "grunt": "^1.0.2",
+    "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-sass": "^1.0.0",
     "grunt-webpack": "^3.0.2",
@@ -27,6 +28,7 @@
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
     "serve-favicon": "~2.3.0",
-    "webpack": "^3.11.0"
+    "webpack": "^3.11.0",
+    "workbox-webpack-plugin": "^2.1.2"
   }
 }

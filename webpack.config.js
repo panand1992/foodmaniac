@@ -1,11 +1,12 @@
 var webpack = require('webpack');
 var path = require('path');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const workboxPlugin = require('workbox-webpack-plugin');
 
 var config = {
-   	entry: './public/javascripts/index.js',
+   	entry: './public/app/javascripts/index.js',
    	output: {
-      	path: __dirname + '/public/javascripts/',
+      	path: __dirname + '/public/dist/javascripts/',
 	    filename: '[name]-bundle.js'
    	},
   	module: {
@@ -34,6 +35,19 @@ var config = {
                 var context = module.context;
                 return context && context.indexOf('node_modules') >= 0;
             }
+        }),
+        new workboxPlugin({
+            globDirectory: 'public/dist/javascripts',
+            globPatterns: ['**/*.{html,js}'],
+            swDest: path.join('public/dist/javascripts', 'serviceworker.js'),
+            clientsClaim: true,
+            skipWaiting: true,
+            runtimeCaching: [
+                {
+                    urlPattern: new RegExp('http://localhost:3000'),
+                    handler: 'staleWhileRevalidate'
+                }
+            ]
         })
     ]
 }

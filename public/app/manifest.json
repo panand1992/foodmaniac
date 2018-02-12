@@ -1,0 +1,9 @@
+{
+	"short_name": "FoodManiac",
+  	"name": "FoodManiac",
+	"start_url": "index.html?launcher=true",
+	"background_color": "#2196F3",
+	"theme_color": "#2196F3",
+	"display": "standalone",
+	"orientation": "portrait"
+}

@@ -2,13 +2,14 @@ const webpackConfig = require('./webpack.config');
 
 module.exports = function(grunt) {
     grunt.initConfig({
+        clean: ['public/dist'],
         sass: {                              // Task 
             dist: {                            // Target 
                 files: [{
                     expand: true,
-                    cwd: 'public/stylesheets/foodmaniac/scss',
+                    cwd: 'public/app/stylesheets/foodmaniac/scss',
                     src: ['*.scss'],
-                    dest: 'public/stylesheets/foodmaniac/css',
+                    dest: 'public/dist/stylesheets/css/',
                     ext: '.css'
                 }]
             }
@@ -21,7 +22,8 @@ module.exports = function(grunt) {
         }
     });
 
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-webpack');
-    grunt.registerTask('prod', ['sass:dist', 'webpack:prod']);
+    grunt.registerTask('prod', ['clean', 'sass:dist', 'webpack:prod']);
 };

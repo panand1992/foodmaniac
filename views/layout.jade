@@ -2,10 +2,26 @@ doctype html
 html
 	head
 		title= title
-		link(rel='stylesheet', href='/stylesheets/foodmaniac/css/main.css')
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+		link(rel='manifest', href='/app/manifest.json')
+		link(rel='stylesheet', href='/dist/stylesheets/css/main.css')
 	body
 		block content
 
 		script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBHgYRuBkxgE5ORR1YVgawYMuhilpFXhbo&libraries=places')
-		script(src="/javascripts/node-static.js")
-		script(src="/javascripts/main-bundle.js")
+		script(src="/dist/javascripts/node-static.js")
+		script(src="/dist/javascripts/main-bundle.js")
+
+		script.
+			if ('serviceWorker' in navigator) {
+			window.addEventListener('load', function() {
+			navigator.serviceWorker.register('/dist/javascripts/serviceworker.js').then(function(registration) {
+			// Registration was successful
+			console.log('ServiceWorker registration successful with scope: ', registration.scope);
+			}, function(err) {
+			// registration failed :(
+			console.log('ServiceWorker registration failed: ', err);
+			});
+			});
+			}
+

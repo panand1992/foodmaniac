@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-class Header extends React.Component {
+class ListPage extends React.Component {
 
 	constructor(props) {
       	super(props);
@@ -10,8 +10,9 @@ class Header extends React.Component {
    	render() {
       	return (
          	<div>
+         		<Header />
 			</div>	
       	);
-   }
+   	}
 }
-export default Header;
+export default ListPage;
