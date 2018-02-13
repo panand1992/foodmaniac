@@ -6,7 +6,8 @@ var config = {
    	entry: './public/app/javascripts/index.js',
    	output: {
       	path: __dirname + '/public/dist/javascripts/',
-	    filename: '[name]-bundle.js'
+	    filename: '[name]-bundle.js',
+        publicPath: '/dist/javascripts/'
    	},
   	module: {
       	loaders: [
@@ -15,7 +16,7 @@ var config = {
 	            exclude: /node_modules/,
 	            loader: 'babel-loader',
 	            query: {
-	               	presets: ['es2015', 'react']
+	               	presets: ['es2015', 'react', 'stage-0']
 	            }
          	}
       	]

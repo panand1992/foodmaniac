@@ -121,6 +121,37 @@ header {
 #sideNavMenu {
   display: none; }
 
+#offlineMsg, #orientationMsg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center; }
+
+#offlineMsg {
+  z-index: 6;
+  background: #000;
+  color: #fff;
+  line-height: 34px;
+  font-size: 16px;
+  height: 0;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  overflow: hidden; }
+
+#orientationMsg {
+  z-index: 7;
+  bottom: 0;
+  background: #fff;
+  color: #000;
+  display: none;
+  font-size: 22px;
+  font-family: inherit;
+  padding: 100px 0; }
+
 @media screen and (max-width: 768px) {
   header .logo {
     text-align: center;

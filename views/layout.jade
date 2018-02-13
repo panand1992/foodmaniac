@@ -13,15 +13,65 @@ html
 		script(src="/dist/javascripts/main-bundle.js")
 
 		script.
+			function updateOnlineStatus(event) {
+				var status = document.getElementById("offlineMsg");
+				var condition = navigator.onLine ? "online" : "offline";
+				status.innerHTML = condition.toUpperCase();
+				if(condition == "offline"){
+					status.style.height = '34px';
+					status.style.background = '#000000';
+					document.getElementById("app").style.marginTop = '34px';
+				}
+				else{
+					status.style.background = '#2ecc71';
+					status.style.height = '34px';
+					document.getElementById("app").style.marginTop = '34px';
+					setTimeout(function(){
+						status.style.height = '0';
+						document.getElementById("app").style.marginTop = '0';
+					}, 1000);
+				}
+			}
+
+			function orientationAlert(){
+				var orientation = screen.orientation || screen.mozOrientation || screen.msOrientation;
+				if(window.location.href.search("rentalAgreement") > -1){
+					document.getElementById("orientationMsg").style.display = 'none';
+				}
+				else{
+					if(typeof orientation !== 'undefined' && orientation != null){
+						if(typeof orientation.type !== 'undefined' && orientation.type != null){
+							if ((orientation.type === "landscape-secondary" || orientation.type === "landscape-primary") && window.innerHeight < window.innerWidth) {
+								document.getElementById("orientationMsg").style.display = 'block';
+							}
+							else{
+								document.getElementById("orientationMsg").style.display = 'none';
+							}
+						}
+						else{
+							document.getElementById("orientationMsg").style.display = 'none';
+						}
+					}
+					else{
+						document.getElementById("orientationMsg").style.display = 'none';
+					}
+				}
+			}
+
+			window.addEventListener('online',  updateOnlineStatus);
+			window.addEventListener('offline', updateOnlineStatus);
+			window.addEventListener("orientationchange", orientationAlert);
+			orientationAlert();
+
 			if ('serviceWorker' in navigator) {
-			window.addEventListener('load', function() {
-			navigator.serviceWorker.register('/serviceworker.js').then(function(registration) {
-			// Registration was successful
-			console.log('ServiceWorker registration successful with scope: ', registration.scope);
-			}, function(err) {
-			// registration failed :(
-			console.log('ServiceWorker registration failed: ', err);
-			});
-			});
+				window.addEventListener('load', function() {
+					navigator.serviceWorker.register('/serviceworker.js').then(function(registration) {
+						// Registration was successful
+						console.log('ServiceWorker registration successful with scope: ', registration.scope);
+					}, function(err) {
+						// registration failed :(
+						console.log('ServiceWorker registration failed: ', err);
+					});
+				});
 			}
 
