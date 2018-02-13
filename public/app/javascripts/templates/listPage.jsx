@@ -11,17 +11,20 @@ class ListPage extends React.Component {
 
         this.state = {
             restaurantList : null,
-            gmap: null
+            gmap: null,
+            listViewOn: true
         }
 
         this.getRestaurants = this.getRestaurants.bind(this);
-        var latLngData = JSON.parse(atob(this.props.match.params.queryparams));
-        this.getRestaurants(latLngData.lat, latLngData.lng);
         this.showRestaurantDetails = this.showRestaurantDetails.bind(this);
+        this.showListView = this.showListView.bind(this);
+        this.showMapView = this.showMapView.bind(this);
 
    	};
 
     componentDidMount() {
+        var latLngData = JSON.parse(atob(this.props.match.params.queryparams));
+        this.getRestaurants(latLngData.lat, latLngData.lng);
         // var map = new google.maps.Map(document.getElementById('mapResults'), {
         //     center: {lat: -33.8688, lng: 151.2195},
         //     zoom: 13
@@ -60,6 +63,14 @@ class ListPage extends React.Component {
         });
     };
 
+    showMapView() {
+        this.setState({listViewOn : false});
+    };
+
+    showListView() {
+        this.setState({listViewOn : true});
+    };
+
     showRestaurantDetails(e, val) {
         this.props.history.push('/detailpage/' + btoa(val));
     };
@@ -68,32 +79,68 @@ class ListPage extends React.Component {
       	return (
          	<div>
          		<Header />
-                <div id="mapResults" style={{width: '900px',height: '400px'}}></div>
-                {
-                    this.state.restaurantList ? 
-                    (
-                        <div>
-                            <div>
-                                <a href='javascript:void(0)' onClick={this.showListView}>List</a>
-                                <a href='javascript:void(0)' onClick={this.showMapView}>Map</a>
-                            </div>
-                 
-                            {this.state.restaurantList.map(function(restaurant, i){
-                                return(
-                                    <div onClick={(e) => this.showRestaurantDetails(e, restaurant.restaurant.id)}>
-                                        <p>Name : {restaurant.restaurant.name}</p>
-                                        <p>Cuisines : {restaurant.restaurant.cuisines}</p>
-                                        <img src={restaurant.restaurant.featured_image} />
-                                        <p>Cost For Two : {restaurant.restaurant.average_cost_for_two}</p>
-                                        <p>Online Delivery : {restaurant.restaurant.has_online_delivery ? ('Yes') : ('No')}</p>
-                                        <p>Rating : {restaurant.restaurant.user_rating.aggregate_rating}</p>
-                                        <br/>
+                {/*<div id="mapResults" style={{width: '900px',height: '400px'}}></div>*/}
+                <div id='listPage'>
+                    <div class='container'>
+                        <div class='row'>
+                            {
+                                this.state.restaurantList ? 
+                                (
+                                    <div class='listPageHeader'>
+                                        <div class='col-lg-12'>
+                                            <div class='row'>
+                                                <div class='col-lg-8 col-sm-6'>
+                                                    {this.state.restaurantList.length} Results Found 
+                                                </div>
+                                                <div class='col-lg-4 col-sm-6 text-right'>
+                                                    <a href='javascript:void(0)' className={this.state.listViewOn ? 'active' : '' } onClick={this.showListView}>List View</a>
+                                                    /
+                                                    <a href='javascript:void(0)' className={this.state.listViewOn ? '' : 'active'} onClick={this.showMapView} >Map View</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class='clearfix'></div>
                                     </div>
-                                )
-                            }, this)}
+                                ) : ''
+                            }
                         </div>
-                    ) : ''
-                }
+                        <div class='row'>
+                            {
+                                this.state.restaurantList && this.state.listViewOn ? 
+                                (
+                                    <div>
+                                        {this.state.restaurantList.map(function(restaurant, i){
+                                            return(
+                                                <div class='col-lg-4 col-sm-12' onClick={(e) => this.showRestaurantDetails(e, restaurant.restaurant.id)}>
+                                                    <div class='listResultItem'>
+                                                        <h3>{restaurant.restaurant.name}</h3>
+                                                        <h5>{restaurant.restaurant.cuisines}</h5>
+                                                        <div class='listItemImg' style={{backgroundImage : 'url('+restaurant.restaurant.featured_image+')'}}></div>
+                                                        <div class='col-lg-12'>
+                                                            <div class='row'>
+                                                                <div class='col-lg-6'>
+                                                                    <div class='row'>
+                                                                        <b>Cost For Two :</b> {restaurant.restaurant.average_cost_for_two}
+                                                                    </div>
+                                                                </div>
+                                                                <div class='col-lg-6 text-right'>
+                                                                    <div class='row'>
+                                                                        <b>Rating :</b> {restaurant.restaurant.user_rating.aggregate_rating}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class='clearfix'></div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        }, this)}
+                                    </div>
+                                ) : ''
+                            }
+                        </div>
+                    </div>
+                </div>
                 <Footer />
 			</div>	
       	);

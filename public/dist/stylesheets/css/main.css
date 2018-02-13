@@ -247,6 +247,48 @@ body, html {
       .firstFoldHome .homeSearchBar .button {
         width: 100%;
         border-radius: 4px; } }
+#listPage {
+  min-height: calc(100vh - 132px); }
+  #listPage .listPageHeader {
+    padding: 16px 0;
+    font-size: 12px; }
+    #listPage .listPageHeader a {
+      text-decoration: none;
+      color: #333; }
+      #listPage .listPageHeader a.active {
+        font-weight: bold; }
+  #listPage .listResultItem {
+    box-shadow: 0 0 2px 0px #000;
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out; }
+    #listPage .listResultItem .listItemImg {
+      width: 100%;
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin-bottom: 15px; }
+    #listPage .listResultItem h3, #listPage .listResultItem h5 {
+      margin: 0px 0px 10px; }
+    #listPage .listResultItem h3 {
+      font-size: 22px; }
+    #listPage .listResultItem h5 {
+      font-size: 14px;
+      line-height: 18px;
+      height: 36px; }
+    #listPage .listResultItem:hover {
+      box-shadow: 0 0 4px 1px #000; }
+
+@media screen and (max-width: 768px) {
+  #listPage {
+    min-height: calc(100vh - 124px); } }
 #detailPage {
   min-height: calc(100vh - 132px); }
   #detailPage .restaurantDetails img {
