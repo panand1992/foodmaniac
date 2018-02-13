@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import MobileSideNav from './mobileSideNav.jsx';
 
 class Header extends React.Component {
 
@@ -47,19 +48,7 @@ class Header extends React.Component {
                         </div>
                    </div>
                 </header>
-                <div id="sideNavMenu" className={this.state.showSideMenu ? 'showMenu' : ''}>
-                    <div class="closeMenuBtn">
-                        <a href="javascript:void(0)" onClick={this.hideMobileNav}>x</a>
-                    </div>
-                    <ul>
-                        <li>
-                            <Link to={'/'}>Home</Link>
-                        </li>
-                        <li>
-                            <Link to={'/about'}>About</Link>
-                        </li>
-                    </ul>
-                </div>
+                <MobileSideNav hideMobileNav={this.hideMobileNav} showSideMenu={this.state.showSideMenu} />
             </div>	
       	);
    }
