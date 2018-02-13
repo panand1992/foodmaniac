@@ -28,6 +28,75 @@ body, html {
 @media (min-width: 1200px) {
   .container {
     width: 1170px; } }
+.ul-dropdown {
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+  position: relative; }
+  .ul-dropdown .selectedValue {
+    display: block;
+    padding: 8px 16px;
+    position: relative; }
+    .ul-dropdown .selectedValue:after {
+      content: '';
+      display: inline-block;
+      height: 4px;
+      width: 4px;
+      border-right: 1px solid #000;
+      border-bottom: 1px solid #000;
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+      -moz-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      -o-transform: rotate(45deg);
+      position: absolute;
+      top: calc(50% - 2px);
+      right: 16px; }
+    .ul-dropdown .selectedValue.openDropdown:after {
+      transform: rotate(-135deg);
+      -webkit-transform: rotate(-135deg);
+      -moz-transform: rotate(-135deg);
+      -ms-transform: rotate(-135deg);
+      -o-transform: rotate(-135deg); }
+  .ul-dropdown .ul-dropdownlist {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 100%;
+    left: -1px;
+    width: 100%;
+    border-radius: 0 0 4px 4px;
+    border: 1px solid #000;
+    border-top: none; }
+    .ul-dropdown .ul-dropdownlist li {
+      padding: 8px 16px;
+      background: #fff; }
+      .ul-dropdown .ul-dropdownlist li:hover {
+        background: #f1f1f1; }
+
+.button {
+  font-size: 16px;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #1abc9c;
+  text-align: center;
+  padding: 8px 16px;
+  color: #fff;
+  border: 1px solid #1abc9c;
+  cursor: pointer; }
+
+.hide {
+  display: none !important; }
+
+@media screen and (max-width: 768px) {
+  .ul-dropdown {
+    font-size: 14px; }
+
+  .button {
+    font-size: 14px; } }
 .firstFoldHome {
   min-height: calc(100vh - 132px);
   background-image: url("../../../app/images/home_bg.jpg");
@@ -45,21 +114,30 @@ body, html {
     width: 60%;
     display: block;
     margin: 50px auto 0; }
-    .firstFoldHome .homeSearchBar select {
+    .firstFoldHome .homeSearchBar .ul-dropdown {
       width: 20%;
       display: inline-block;
       float: left;
-      box-sizing: border-box; }
+      border-radius: 4px 0 0 4px; }
     .firstFoldHome .homeSearchBar input {
       outline: none;
       width: 60%;
       display: inline-block;
-      box-sizing: border-box; }
-    .firstFoldHome .homeSearchBar a {
+      box-sizing: border-box;
+      border-top: 1px solid #000;
+      border-bottom: 1px solid #000;
+      border-left: 1px solid #fff;
+      border-right: 1px solid #fff;
+      font-size: 16px;
+      padding: 8px 16px;
+      font-family: inherit; }
+    .firstFoldHome .homeSearchBar .button {
       width: 20%;
       display: inline-block;
       float: right;
-      box-sizing: border-box; }
+      box-sizing: border-box;
+      text-decoration: none;
+      border-radius: 0 4px 4px 0; }
 
 @media screen and (max-width: 768px) {
   .firstFoldHome {
@@ -68,13 +146,19 @@ body, html {
       font-size: 24px; }
     .firstFoldHome .homeSearchBar {
       width: 80%; }
-      .firstFoldHome .homeSearchBar select {
-        width: 100%; }
-      .firstFoldHome .homeSearchBar input {
-        width: 100%; }
-      .firstFoldHome .homeSearchBar a {
+      .firstFoldHome .homeSearchBar .ul-dropdown {
         width: 100%;
-        text-align: center; } }
+        margin-bottom: 10px;
+        border-radius: 4px; }
+      .firstFoldHome .homeSearchBar input {
+        width: 100%;
+        margin-bottom: 10px;
+        font-size: 14px;
+        border: 1px solid #000;
+        border-radius: 4px; }
+      .firstFoldHome .homeSearchBar .button {
+        width: 100%;
+        border-radius: 4px; } }
 footer {
   background: #2c3e50; }
   footer p {

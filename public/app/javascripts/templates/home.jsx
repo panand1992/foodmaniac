@@ -10,10 +10,14 @@ class Home extends React.Component {
 
       	this.state = {
       		selectedCity : null,
-      		selectedPlace : null
+      		selectedPlace : null,
+            showDropdownMenu : false,
+            selectedDropdownValue : 'Bangalore'
       	}
 
       	this.searchRestaurant = this.searchRestaurant.bind(this);
+        this.onClickDropdown = this.onClickDropdown.bind(this);
+        this.selectDropdownValue = this.selectDropdownValue.bind(this);
    	};
 
    	componentDidMount() {
@@ -25,14 +29,6 @@ class Home extends React.Component {
           	var place = autocomplete.getPlace();
           	if (place.geometry) {
           		self.setState({selectedPlace : place});
-         //    if (place.geometry.viewport) {
-	        //     map.fitBounds(place.geometry.viewport);
-	        // } else {
-	        //     map.setCenter(place.geometry.location);
-	        //     map.setZoom(17);  // Why 17? Because it looks good.
-	        // }
-         //    self.getRestaurants(place.geometry.location.lat(), place.geometry.location.lng());
-         //    window.alert("No details available for input: '" + JSON.stringify(place.geometry) + "'");
             	return;
           	}
         });
@@ -46,6 +42,15 @@ class Home extends React.Component {
    		this.props.history.push('/listpage/' + btoa(JSON.stringify(data)));
    	};
 
+    onClickDropdown() {
+        this.setState({showDropdownMenu: !this.state.showDropdownMenu});
+    };
+
+    selectDropdownValue(e) {
+        this.setState({selectedDropdownValue : e.target.textContent});
+        this.onClickDropdown();
+    }
+
    	render() {
       	return (
          	<div>
@@ -55,15 +60,18 @@ class Home extends React.Component {
 	            		<div class='row'>
 	            			<h1>Find your favourite restaurant without hassle</h1>
 	            			<div class='homeSearchBar'>
-				            	<select>
-				            		<option>Bangalore</option>
-				            		<option>Mumbai</option>
-				            		<option>Delhi</option>
-				            		<option>Chennai</option>
-				            		<option>Pune</option>
-				            	</select>
+                                <div class='ul-dropdown'>
+                                    <span className={this.state.showDropdownMenu ? 'selectedValue openDropdown' : 'selectedValue'} onClick={this.onClickDropdown}>{this.state.selectedDropdownValue}</span>
+                                    <ul className={this.state.showDropdownMenu ? 'ul-dropdownlist' : 'hide'}>
+                                        <li onClick={this.selectDropdownValue}>Bangalore</li>
+                                        <li onClick={this.selectDropdownValue}>Mumbai</li>
+                                        <li onClick={this.selectDropdownValue}>Delhi</li>
+                                        <li onClick={this.selectDropdownValue}>Pune</li>
+                                        <li onClick={this.selectDropdownValue}>Chennai</li>
+                                    </ul>
+                                </div>
 				            	<input id="locationInput" type="text" placeholder="Enter a location" />
-				            	<a href='javascript:void(0)' onClick={this.searchRestaurant}>Search</a>
+				            	<a href='javascript:void(0)' onClick={this.searchRestaurant} class='button'>Search</a>
 				            </div>
 	            		</div>
 	            	</div>

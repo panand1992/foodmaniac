@@ -16,23 +16,32 @@
 		width: 60%;
 		display: block;
 		margin: 50px auto 0;
-		select{
+		.ul-dropdown{
 			width: 20%;
 			display: inline-block;
 			float: left;
-			box-sizing: border-box;
+			border-radius: 4px 0 0 4px;
 		}
 		input{
 			outline:none;
 			width: 60%;
 			display: inline-block;
 			box-sizing: border-box;
+			border-top:1px solid #000;
+			border-bottom:1px solid #000;
+			border-left:1px solid #fff;
+			border-right:1px solid #fff;
+			font-size: 16px;
+			padding: 8px 16px;
+			font-family: inherit;
 		}
-		a{
+		.button{
 			width: 20%;
 			display: inline-block;
 			float: right;
 			box-sizing: border-box;
+			text-decoration: none;
+			border-radius: 0 4px 4px 0;
 		}
 	}
 }
@@ -45,15 +54,21 @@
 		}
 		.homeSearchBar{
 			width: 80%;
-			select{
+			.ul-dropdown{
 				width: 100%;
+				margin-bottom: 10px;
+				border-radius:4px;
 			}
 			input{
 				width: 100%;
+				margin-bottom: 10px;
+				font-size: 14px;
+				border:1px solid #000;
+				border-radius: 4px;
 			}
-			a{
+			.button{
 				width: 100%;
-				text-align: center;				
+				border-radius:4px;			
 			}
 		}
 	}
