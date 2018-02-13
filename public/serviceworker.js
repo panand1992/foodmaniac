@@ -24,7 +24,7 @@ const fileManifest = [
   },
   {
     "url": "/dist/javascripts/1-bundle.js",
-    "revision": "5478aa17a094ccb9778219e0f0d40148"
+    "revision": "892b3e235ce50b7c10e489faf167d1ee"
   },
   {
     "url": "/dist/javascripts/2-bundle.js",
@@ -36,7 +36,7 @@ const fileManifest = [
   },
   {
     "url": "/dist/javascripts/main-bundle.js",
-    "revision": "d68e52ddf59800fedac04db0bca927ea"
+    "revision": "121d2a2e718e1c8990b58527ee36e8b7"
   },
   {
     "url": "/dist/javascripts/node-static.js",

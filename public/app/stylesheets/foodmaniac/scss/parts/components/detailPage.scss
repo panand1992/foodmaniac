@@ -1,0 +1,31 @@
+#detailPage{
+	min-height: calc(100vh - 132px);
+	.restaurantDetails{
+		img{
+			max-width:100%;
+		}
+		.detailFeatured{
+			box-shadow: 0 0 2px 0px #000;
+			border-radius: 4px;
+			padding: 20px;
+			box-sizing: border-box;
+			margin-bottom: 20px;
+			.detailContent{
+				.rating{
+					border-bottom:1px solid #777;
+					padding: 16px 0;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 768px){
+	#detailPage{
+		min-height: calc(100vh - 124px);
+		.restaurantDetails{
+			padding: 0 15px;
+			font-size: 14px;
+		}
+	}
+}
