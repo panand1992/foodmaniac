@@ -25,12 +25,13 @@ class ListPage extends React.Component {
     componentDidMount() {
         var latLngData = JSON.parse(atob(this.props.match.params.queryparams));
         this.getRestaurants(latLngData.lat, latLngData.lng);
-        // var map = new google.maps.Map(document.getElementById('mapResults'), {
-        //     center: {lat: -33.8688, lng: 151.2195},
-        //     zoom: 13
-        // });
+        
+        var map = new google.maps.Map(document.getElementById('mapResults'), {
+            center: {lat: -33.8688, lng: 151.2195},
+            zoom: 13
+        });
 
-        // self.setState({gmap : map});
+        this.setState({gmap : map});
     };
 
     getRestaurants(lat, lng) {
@@ -44,6 +45,7 @@ class ListPage extends React.Component {
             var responseData = JSON.parse(response);
             self.setState({restaurantList : responseData.nearby_restaurants});
             var infowindow = new google.maps.InfoWindow();
+
             for(var i=0;i<self.state.restaurantList.length;i++){
                 var marker = new google.maps.Marker({
                     position: {lat: parseFloat(self.state.restaurantList[i].restaurant.location.latitude), lng: parseFloat(self.state.restaurantList[i].restaurant.location.longitude)},
@@ -53,9 +55,31 @@ class ListPage extends React.Component {
                 marker.addListener('click', function() {
                     infowindow.open(self.state.gmap, marker);
                 });
+
                 google.maps.event.addListener(marker, 'click', (function(marker, i) {
                     return function() {
-                      infowindow.setContent("<div>"+self.state.restaurantList[i].restaurant.name+"</div>");
+                        infowindow.setContent(
+                            "<div class='listResultItem mapItem'>"+
+                                "<h3><a href='/detailPage/"+btoa(self.state.restaurantList[i].restaurant.id)+"' target='_blank'>" + self.state.restaurantList[i].restaurant.name + "</a></h3>"+
+                                "<h5>" + self.state.restaurantList[i].restaurant.cuisines + "</h5>"+
+                                "<div class='listItemImg' style='background-image : url("+self.state.restaurantList[i].restaurant.featured_image+")'></div>"+
+                                "<div class='col-lg-12'>"+
+                                    "<div class='row'>"+
+                                        "<div class='col-lg-6'>"+
+                                            "<div class='row'>"+
+                                                "<b>Cost For Two :</b> " +  self.state.restaurantList[i].restaurant.average_cost_for_two +
+                                            "</div>"+
+                                        "</div>"+
+                                        "<div class='col-lg-6 text-right'>"+
+                                            "<div class='row'>"+
+                                                "<b>Rating :</b>" + self.state.restaurantList[i].restaurant.user_rating.aggregate_rating + 
+                                            "</div>"+
+                                        "</div>"+
+                                    "</div>"+
+                                "</div>"+
+                                "<div class='clearfix'></div>"+
+                            "</div>"
+                        );
                       infowindow.open(self.state.gmap, marker);
                     }
                 })(marker, i));
@@ -64,7 +88,13 @@ class ListPage extends React.Component {
     };
 
     showMapView() {
+        var self = this;
         this.setState({listViewOn : false});
+        setTimeout(function(){
+            google.maps.event.trigger(self.state.gmap, 'resize');
+            var latLngData = JSON.parse(atob(self.props.match.params.queryparams));
+            self.state.gmap.setCenter({lat: latLngData.lat, lng: latLngData.lng});
+        }, 0);
     };
 
     showListView() {
@@ -79,7 +109,6 @@ class ListPage extends React.Component {
       	return (
          	<div>
          		<Header />
-                {/*<div id="mapResults" style={{width: '900px',height: '400px'}}></div>*/}
                 <div id='listPage'>
                     <div class='container'>
                         <div class='row'>
@@ -103,6 +132,12 @@ class ListPage extends React.Component {
                                     </div>
                                 ) : ''
                             }
+                        </div>
+                        <div class='row'>
+                            <div class='col-lg-12'>
+                                <div id="mapResults" className={this.state.listViewOn ? 'hide' : ''}>
+                                </div>
+                            </div>
                         </div>
                         <div class='row'>
                             {

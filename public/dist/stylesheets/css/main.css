@@ -257,6 +257,9 @@ body, html {
       color: #333; }
       #listPage .listPageHeader a.active {
         font-weight: bold; }
+  #listPage #mapResults {
+    width: 100%;
+    height: 400px; }
   #listPage .listResultItem {
     box-shadow: 0 0 2px 0px #000;
     border-radius: 4px;
@@ -285,10 +288,34 @@ body, html {
       height: 36px; }
     #listPage .listResultItem:hover {
       box-shadow: 0 0 4px 1px #000; }
+    #listPage .listResultItem.mapItem {
+      box-shadow: none;
+      border-radius: 0;
+      margin-bottom: 0; }
+      #listPage .listResultItem.mapItem .listItemImg {
+        height: 150px; }
+      #listPage .listResultItem.mapItem h3 {
+        font-size: 20px;
+        margin: 0 8px; }
+        #listPage .listResultItem.mapItem h3 a {
+          color: #000;
+          text-decoration: none; }
+      #listPage .listResultItem.mapItem h5 {
+        height: auto;
+        margin: 0 8px; }
+      #listPage .listResultItem.mapItem:hover {
+        box-shadow: none; }
 
 @media screen and (max-width: 768px) {
   #listPage {
-    min-height: calc(100vh - 124px); } }
+    min-height: calc(100vh - 124px); }
+    #listPage .listResultItem.mapItem {
+      font-size: 12px; }
+      #listPage .listResultItem.mapItem h3 {
+        font-size: 18px; }
+      #listPage .listResultItem.mapItem h5 {
+        font-size: 12px;
+        line-height: 16px; } }
 #detailPage {
   min-height: calc(100vh - 132px); }
   #detailPage .restaurantDetails img {
