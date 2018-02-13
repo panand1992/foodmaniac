@@ -5,5 +5,12 @@
 	"background_color": "#2196F3",
 	"theme_color": "#2196F3",
 	"display": "standalone",
-	"orientation": "portrait"
+	"orientation": "portrait",
+	"icons": [
+		{
+			"src": "app/images/homescreen_icon.png",
+			"type": "image/png",
+			"sizes": "192x192"
+		}
+	]
 }
